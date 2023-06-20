@@ -10,26 +10,29 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.brunobcp.ociappbcp.info.HostInfoController;
+
 @Component
 public class ScheduledTasks {
 
-	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+    private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-    
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-	private int cnt = 0;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    private int cnt = 0;
 
     @Scheduled(fixedRateString = "${myapp.fixedRate}")
-	public void insertData() {
-		log.info("# Insert data {}", dateFormat.format(new Date()));
-		jdbcTemplate.update("insert into ATABLE (INS_DATE) values (sysdate)");
-		printMemoryStatus(++cnt);
-	}
+    public void insertData() {
+        log.info("# Insert data {}", dateFormat.format(new Date()));
+        jdbcTemplate.update("insert into ATABLE (INS_DATE, INFO_CI) values (sysdate, ?)",
+                HostInfoController.getHostInfo());
+        printMemoryStatus(++cnt);
+    }
 
-	private void printMemoryStatus(int cnt) {
+    private void printMemoryStatus(int cnt) {
         int mb = 1024 * 1024;
         Runtime runtime = Runtime.getRuntime();
         StringBuilder builder = new StringBuilder();
@@ -38,6 +41,6 @@ public class ScheduledTasks {
         builder.append("\tFree Memory   : " + runtime.freeMemory() / mb + " mb");
         builder.append("\tTotal Memory  : " + runtime.totalMemory() / mb + " mb");
         builder.append("\tMax Memory    : " + runtime.maxMemory() / mb + " mb");
-       log.info(builder.toString());
+        log.info(builder.toString());
     }
 }

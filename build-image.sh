@@ -1,5 +1,5 @@
 #!/bin/bash
-tag="v2"
+tag="v3"
 
 echo "## Package JAR"
 ./mvnw clean package

@@ -19,17 +19,17 @@ public class HostInfoController {
         return getHostInfo();
     }
 
-    public String getHostInfo() {
-    try {
-        InetAddress inetAddress = InetAddress.getLocalHost();
-        String hostname = inetAddress.getHostName();
-        String ipAddress = inetAddress.getHostAddress();
-        log.info("Hostname {} and Address {}", hostname, ipAddress);
-        return "Hostname: " + hostname + "\nIP Address: " + ipAddress;
-    } catch (UnknownHostException e) {
-        log.error("Unable to retrieve host information");
-        return "Unable to retrieve host information";
+    public static String getHostInfo() {
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            String hostname = inetAddress.getHostName();
+            String ipAddress = inetAddress.getHostAddress();
+            log.info("Hostname {} and Address {}", hostname, ipAddress);
+            return "Hostname: " + hostname + " - IP Address: " + ipAddress;
+        } catch (UnknownHostException e) {
+            log.error("Unable to retrieve host information");
+            return "Unable to retrieve host information";
+        }
     }
-}
 
 }
