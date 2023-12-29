@@ -2,12 +2,12 @@ version: '3'
 
 services:
   oci-app-bcp:
-    image: bproenca/oci-app-bcp:v3
+    image: bproenca/oci-app-bcp:v4
     restart: always
     volumes:
       - "/<path>/oci_wallet:/opt/oci_wallet"
     ports:
-      - "8383:8080"
+      - "8484:8080"
     deploy:
       resources:
         limits:

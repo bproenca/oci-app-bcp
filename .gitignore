@@ -33,3 +33,4 @@ build/
 .vscode/
 oci-docker-compose.yml
 docker/local-docker-compose.yml
+local-run.txt
