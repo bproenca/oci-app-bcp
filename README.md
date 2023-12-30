@@ -22,17 +22,33 @@ http localhost:8080/api/show
 http localhost:8080/api/ping
 ```
 
-## Build Image
+# Container
+
+### Build Image
 
 - Edit (version) and run `docker\buid-image.sh`
 - Create `local-docker-compose.yml` (see template)
+
+### Run/Test
 - Run `docker-compose -f docker/local-docker-compose.yml up -d`
+- [Test](#test) _see "docker-compose" PORT number_
 - Stop `docker-compose -f docker/local-docker-compose.yml down`
-- [Test (see "docker-compose" PORT number)](#test)
+
+### Publish Image
+- `docker login`
+- `docker push bproenca/oci-app-bcp:?` 
 
 ## Deploy
 
 ```sh
 scp -i ~/<pem> Wallet_db4bcp.zip  opc@<ip>:/home/opc/wks/wallet
 
+```
+
+## OCI Test
+
+https://httpie.io/
+```sh
+http https://www.brunobcp.com/api/info
+http --follow http://www.brunobcp.com/api/info
 ```
