@@ -8,4 +8,4 @@ CREATE TABLE ATABLE
 , CONSTRAINT ATABLE_PK PRIMARY KEY (ID) ENABLE 
 );
 
-select TO_CHAR(ins_date, 'DD/MM/YYYY HH24:MI:SS') ins_date from ATABLE order by ins_date desc;
+select id, info_ci, TO_CHAR(ins_date, 'DD/MM/YYYY HH24:MI:SS') ins_date from ATABLE order by id desc;
