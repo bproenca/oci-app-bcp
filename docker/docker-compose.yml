@@ -8,6 +8,9 @@ services:
       - "/<path>/oci_wallet:/opt/oci_wallet"
     ports:
       - "8484:8080"
+    logging:
+      options:
+        max-size: "50m"
     deploy:
       resources:
         limits:
