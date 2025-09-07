@@ -26,7 +26,7 @@ http localhost:8080/api/ping
 
 ### Build Image
 
-- Edit (version) and run `docker\buid-image.sh`
+- Edit (version) and run `docker/build-image.sh`
 - Create `local-docker-compose.yml` (see template)
 
 ### Run/Test

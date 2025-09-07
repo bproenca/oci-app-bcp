@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,15 +62,20 @@ public class ControllerDemo {
 	}
 
     @GetMapping("/exit")
-	public String exit() {
-        log.info("## Exit");
-        System.exit(0);
+	public String exit(@RequestParam(value = "code", defaultValue = "123") Integer code) {
+        log.info("## Exiting with code {}", code);
+        System.exit(code);
         log.info("n/a exit");
         return "n/a exit";
 	}
     
     @GetMapping("/memory")
-    public void memory() {
+    public ResponseEntity<String> memory() {
+        return new ResponseEntity<>(printMemoryStatus(0), HttpStatus.OK);
+    }
+
+    @GetMapping("/oom")
+    public void oom() {
         log.info("## Memory");
         List<Object> list = new ArrayList<Object>();
         int cnt = 0;
@@ -84,7 +91,7 @@ public class ControllerDemo {
         }
     }
 
-    private void printMemoryStatus(int cnt) {
+    private String printMemoryStatus(int cnt) {
         int mb = 1024 * 1024;
         Runtime runtime = Runtime.getRuntime();
         StringBuilder builder = new StringBuilder();
@@ -93,6 +100,7 @@ public class ControllerDemo {
         builder.append("\tFree Memory   : " + runtime.freeMemory() / mb + " mb");
         builder.append("\tTotal Memory  : " + runtime.totalMemory() / mb + " mb");
         builder.append("\tMax Memory    : " + runtime.maxMemory() / mb + " mb");
-       log.info(builder.toString());
+        log.info(builder.toString());
+        return builder.toString();
     }
 }

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   oci-app-bcp:
-    image: bproenca/oci-app-bcp:v5
+    image: bproenca/oci-app-bcp:v6
     restart: always
     volumes:
       - "/<path>/oci_wallet:/opt/oci_wallet"
