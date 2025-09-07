@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.brunobcp</groupId>
 	<artifactId>oci-app-bcp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v6</version>
 	<name>oci-app-bcp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>

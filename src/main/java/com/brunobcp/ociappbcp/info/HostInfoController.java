@@ -24,8 +24,9 @@ public class HostInfoController {
             InetAddress inetAddress = InetAddress.getLocalHost();
             String hostname = inetAddress.getHostName();
             String ipAddress = inetAddress.getHostAddress();
-            log.info("Hostname {} and Address {}", hostname, ipAddress);
-            return "Hostname: " + hostname + " - IP Address: " + ipAddress;
+            String result = "Hostname: " + hostname + " | IP Address: " + ipAddress + " | Version v6";
+            log.info(result);
+            return result;
         } catch (UnknownHostException e) {
             log.error("Unable to retrieve host information");
             return "Unable to retrieve host information";
